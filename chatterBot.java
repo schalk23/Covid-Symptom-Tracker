@@ -30,7 +30,7 @@ public class chatterBot extends JFrame {
 
         chatterBox.addActionListener(new ActionListener() {
             @Override
-            //NOTE: The cursor must be in the middle of the text area, or else it will not register the text !!!!!!!!!!!!!!!!!!!!! run code
+            //NOTE: The cursor must be in the middle of the text area, or else it will not register the text !!!!!!!!!!!!!!!!!!!!! run code option
             public void actionPerformed(ActionEvent e) {
                 String getTxt = chatterBox.getText();
                 // We need to make sure that the text area is not empty, they will be prompted
