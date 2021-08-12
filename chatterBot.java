@@ -1,9 +1,14 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class chatterBot extends JFrame {
     private JTextArea chatArea = new JTextArea();
@@ -21,16 +26,18 @@ public class chatterBot extends JFrame {
         frame.add(chatterBox);
 
         // Setting default settings for text area
-        chatArea.setSize(800, 700);
-        chatArea.setLocation(4, 4);
+        chatArea.setSize(600, 700);
+        chatArea.setLocation(6, 6);
 
         // Setting default settings for text field
+        // https://stackoverflow.com/questions/18908902/set-cursor-on-a-jtextfield -
+        // allows for the cursor to be set automatically
+        chatterBox.requestFocusInWindow();
         chatterBox.setSize(600, 40);
         chatterBox.setLocation(2, 0);
 
         chatterBox.addActionListener(new ActionListener() {
             @Override
-            //NOTE: The cursor must be in the middle of the text area, or else it will not register the text !!!!!!!!!!!!!!!!!!!!! run code option
             public void actionPerformed(ActionEvent e) {
                 String getTxt = chatterBox.getText();
                 // We need to make sure that the text area is not empty, they will be prompted
@@ -39,17 +46,19 @@ public class chatterBot extends JFrame {
                     chatArea.append(
                             "Please type a message to send the Chatter Bot or type EXIT to exit out of the program."
                                     + "\n");
-                    // if(getTxt.toUpperCase() == "EXIT" || getTxt.toUpperCase().contains("EXIT")) {
-                    // frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                    
+                } 
+                //This command will implement the EXIT window command if the user types EXIT in any manner
+                if (getTxt.toUpperCase() == "EXIT" || getTxt.toUpperCase().contains("EXIT")) {
+                    //this command will close the window that the user no longer wants
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 }
                 chatArea.append("Me >> " + getTxt + "\n");
-                chatterBox.setText("");
-                // chatArea.append("Chatter Bot >>>" + getTxt + "\n");
 
                 if (getTxt.contains("hello")) {
                     chatArea.append("Chatter Bot >>> Hello Friend!" + "\n");
                 }
+                chatterBox.setText("");
+                // chatArea.append("Chatter Bot >>>" + getTxt + "\n");
 
             }
         });
