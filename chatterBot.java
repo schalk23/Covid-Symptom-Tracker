@@ -32,7 +32,7 @@ public class chatterBot extends JFrame {
         // Setting default settings for text field
         // https://stackoverflow.com/questions/18908902/set-cursor-on-a-jtextfield -
         // allows for the cursor to be set automatically
-        chatterBox.requestFocusInWindow();
+        chatterBox.requestFocus();
         chatterBox.setSize(600, 40);
         chatterBox.setLocation(2, 0);
 
@@ -47,11 +47,12 @@ public class chatterBot extends JFrame {
                             "Please type a message to send the Chatter Bot or type EXIT to exit out of the program."
                                     + "\n");
                 } 
-                //This command will implement the EXIT window command if the user types EXIT in any manner
-                if (getTxt.toUpperCase() == "EXIT" || getTxt.toUpperCase().contains("EXIT")) {
+                //This command will implement the EXIT window command if the user types EXIT in any manner (lower or uppercase)
+                if (getTxt.toUpperCase() == "EXIT" || getTxt.toUpperCase() == ("EXIT")) {
                     //this command will close the window that the user no longer wants
                         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                 }
+                //this allows for the back and forth with the users cursor being specified for whos text was whos
                 chatArea.append("Me >> " + getTxt + "\n");
 
                 if (getTxt.contains("hello")) {
