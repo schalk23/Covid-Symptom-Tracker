@@ -8,7 +8,7 @@ public class symptomTracker extends JFrame implements ActionListener {
     private JFrame jFrame;
     private JTextArea textArea;
     private JTextField textField;
-    private JButton checkSyps;
+    private JButton checkSyps, finished;
     private JButton findNearestDoc;
     private JLabel jLabel;
     private JPanel jPanel;
@@ -17,7 +17,7 @@ public class symptomTracker extends JFrame implements ActionListener {
     // jButton Symptoms
     private JButton cough, fever, chills, shortOBreath, fatigue, muscOBodAche, headache, lossTaste, lossSmell,
             soreThroat, runnyNose, vomiting, congestion, nausea, diarrea;
-    private JLabel whichSyps;
+    private JLabel whichSyps, currSyps;
     ArrayList<String> clientSyps = new ArrayList<String>();
 
     public symptomTracker() {
@@ -83,13 +83,14 @@ public class symptomTracker extends JFrame implements ActionListener {
         muscOBodAche = new JButton("Muscle or body aches");
         headache = new JButton("Headache");
         lossTaste = new JButton("New loss of taste");
-        lossSmell = new JButton("New loss of Smell");
+        lossSmell = new JButton("New loss of smell");
         soreThroat = new JButton("Sore throat");
         congestion = new JButton("Congestion in nose");
         runnyNose = new JButton("Runny Nose");
         nausea = new JButton("Nausea");
         vomiting = new JButton("Vomiting");
         diarrea = new JButton("Diarrhea");
+        finished = new JButton("CLICK WHEN FINISHED");
 
         // add new symptom buttons
         jPanel.add(cough);
@@ -106,9 +107,10 @@ public class symptomTracker extends JFrame implements ActionListener {
         jPanel.add(nausea);
         jPanel.add(vomiting);
         jPanel.add(diarrea);
-
+        
         whichSyps = new JLabel("Select all symptoms which apply to you.", JLabel.CENTER);
         jPanel.add(whichSyps);
+        jPanel.add(finished);
 
         // adding action listeners for each symptom button
         cough.addActionListener(new java.awt.event.ActionListener() {
@@ -228,6 +230,41 @@ public class symptomTracker extends JFrame implements ActionListener {
                 }
             }
         });
+        finished.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //remove all of the button and labels from this previous window for new window
+                jPanel.remove(cough);
+                jPanel.remove(fever);
+                jPanel.remove(chills);
+                jPanel.remove(shortOBreath);
+                jPanel.remove(fatigue);
+                jPanel.remove(muscOBodAche);
+                jPanel.remove(headache);
+                jPanel.remove(lossSmell);
+                jPanel.remove(lossTaste);
+                jPanel.remove(soreThroat);
+                jPanel.remove(congestion);
+                jPanel.remove(nausea);
+                jPanel.remove(vomiting);
+                jPanel.remove(diarrea);
+
+                jPanel.remove(whichSyps);
+                jPanel.remove(finished);
+                //Again, updating all of the removed components to move onto the next window
+                jPanel.revalidate();
+                jPanel.setVisible(false);
+                lastPage();
+            }
+        });
+    }
+
+    private void lastPage() {
+       currSyps = new JLabel("These are all the symptoms you have just provided that you have:", JLabel.CENTER);
+       jPanel.setLayout(new FlowLayout());
+       jPanel.add(currSyps);
+       jPanel.setVisible(true);
+
     }
 
     public static void main(String args[]) {
