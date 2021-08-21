@@ -144,7 +144,7 @@ public class symptomTracker extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!clientSyps.contains("Shortness of breath or difficulty breathing")) {
-                    clientSyps.add("Shortness of Breath or difficulty breathing");
+                    clientSyps.add("Shortness of breath or difficulty breathing");
                 }
             }
         });
@@ -264,6 +264,17 @@ public class symptomTracker extends JFrame implements ActionListener {
        jPanel.setLayout(new FlowLayout());
        jPanel.add(currSyps);
        jPanel.setVisible(true);
+       Font txtfont = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+       textArea.setFont(txtfont);
+       jPanel.add(textArea);
+       jFrame.setSize(425,350);
+       //for each loop to go through client symptom list and add each symptom they have to the text area
+       for(String str: clientSyps) {
+           textArea.append(str + "\n");
+       }
+       //It is not necessary for our client to edit the array list in the text area
+       textArea.setEditable(false);
+
 
     }
 
