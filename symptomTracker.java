@@ -12,8 +12,8 @@ public class symptomTracker extends JFrame implements ActionListener {
     private JButton findNearestDoc;
     private JLabel jLabel;
     private JPanel jPanel;
-    private JLabel moment;
-    private JPanel symptomPanel;
+    private JLabel mustHaveSymp;
+    boolean haveSymptrue;
     // jButton Symptoms
     private JButton cough, fever, chills, shortOBreath, fatigue, muscOBodAche, headache, lossTaste, lossSmell,
             soreThroat, runnyNose, vomiting, congestion, nausea, diarrea;
@@ -26,13 +26,16 @@ public class symptomTracker extends JFrame implements ActionListener {
 
     private void setGUI() {
         // creating the new swing components
+        haveSymptrue = false;
         jFrame = new JFrame();
         textArea = new JTextArea();
         textField = new JTextField();
         checkSyps = new JButton("Check off symptoms");
         jPanel = new JPanel();
-        jPanel.setLayout(new GridLayout(2, 4));
-        jLabel = new JLabel("Select the option which best suits your needs.", JLabel.CENTER);
+        jPanel.setLayout(new GridLayout(3, 2));
+        jLabel = new JLabel("Click 'check off symptoms' to begin logging your Covid-19 symptoms.", JLabel.CENTER);
+        Font text1 = new Font(Font.SANS_SERIF, Font.BOLD, 14);
+        jLabel.setFont(text1);
         // findNearestDoc = new JButton("Find nearest medical help");
         /*
          * We need to extend the JFrame in order to be able to use this jFrame action
@@ -42,7 +45,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         jFrame.setVisible(true);
         jFrame.setResizable(false);
         jFrame.setTitle(" Covid-19 Tracker and Interative Treatment Bot");
-        jFrame.setSize(500, 200);
+        jFrame.setSize(500, 300);
         jPanel.add(jLabel);
         // jPanel.add(findNearestDoc);
         jFrame.add(jPanel);
@@ -72,7 +75,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         jFrame.setVisible(true);
         jPanel.setLayout(new FlowLayout());
         // expand size for new layout of buttons
-        jFrame.setSize(600, 200);
+        jFrame.setSize(500, 300);
 
         // instantiate new symptom buttons
         cough = new JButton("Cough");
@@ -104,11 +107,14 @@ public class symptomTracker extends JFrame implements ActionListener {
         jPanel.add(lossSmell);
         jPanel.add(soreThroat);
         jPanel.add(congestion);
+        jPanel.add(runnyNose);
         jPanel.add(nausea);
         jPanel.add(vomiting);
         jPanel.add(diarrea);
-        
+
         whichSyps = new JLabel("Select all symptoms which apply to you.", JLabel.CENTER);
+        Font text2 = new Font(Font.SANS_SERIF, Font.BOLD, 17);
+        whichSyps.setFont(text2);
         jPanel.add(whichSyps);
         jPanel.add(finished);
 
@@ -202,7 +208,14 @@ public class symptomTracker extends JFrame implements ActionListener {
                 if (!clientSyps.contains("Congestion")) {
                     clientSyps.add("Congestion");
                 }
-
+            }
+        });
+        runnyNose.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!clientSyps.contains("Runny nose")) {
+                    clientSyps.add("Runny nose");
+                }
             }
         });
         nausea.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +224,6 @@ public class symptomTracker extends JFrame implements ActionListener {
                 if (!clientSyps.contains("Nausea")) {
                     clientSyps.add("Nausea");
                 }
-
             }
         });
         vomiting.addActionListener(new java.awt.event.ActionListener() {
@@ -233,49 +245,64 @@ public class symptomTracker extends JFrame implements ActionListener {
         finished.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //remove all of the button and labels from this previous window for new window
-                jPanel.remove(cough);
-                jPanel.remove(fever);
-                jPanel.remove(chills);
-                jPanel.remove(shortOBreath);
-                jPanel.remove(fatigue);
-                jPanel.remove(muscOBodAche);
-                jPanel.remove(headache);
-                jPanel.remove(lossSmell);
-                jPanel.remove(lossTaste);
-                jPanel.remove(soreThroat);
-                jPanel.remove(congestion);
-                jPanel.remove(nausea);
-                jPanel.remove(vomiting);
-                jPanel.remove(diarrea);
+                // symptoms need to be added before the client wants to proceeed
+                if (clientSyps.isEmpty() && haveSymptrue == false) {
+                    mustHaveSymp = new JLabel("You must add at least one symptom before proceeding.");
+                    jPanel.add(mustHaveSymp);
+                    jPanel.revalidate();
+                    jPanel.setVisible(true);
+                    haveSymptrue = true;
+                } else {
+                    mustHaveSymp.setVisible(false);
+                    mustHaveSymp.setVisible(true);
+                    if (haveSymptrue && !clientSyps.isEmpty()) {
+                        // remove all of the button and labels from this previous window for new window
+                        jPanel.remove(cough);
+                        jPanel.remove(fever);
+                        jPanel.remove(chills);
+                        jPanel.remove(shortOBreath);
+                        jPanel.remove(fatigue);
+                        jPanel.remove(muscOBodAche);
+                        jPanel.remove(headache);
+                        jPanel.remove(lossSmell);
+                        jPanel.remove(lossTaste);
+                        jPanel.remove(soreThroat);
+                        jPanel.remove(congestion);
+                        jPanel.remove(runnyNose);
+                        jPanel.remove(nausea);
+                        jPanel.remove(vomiting);
+                        jPanel.remove(diarrea);
 
-                jPanel.remove(whichSyps);
-                jPanel.remove(finished);
-                //Again, updating all of the removed components to move onto the next window
-                jPanel.revalidate();
-                jPanel.setVisible(false);
-                lastPage();
+                        jPanel.remove(whichSyps);
+                        jPanel.remove(finished);
+                        jPanel.remove(mustHaveSymp);
+                        // Again, updating all of the removed components to move onto the next window
+                        jPanel.revalidate();
+                        jPanel.setVisible(false);
+                        lastPage();
+                    }
+                }
             }
         });
     }
 
+    //This method designates the last page of the symptom checker
     private void lastPage() {
-       currSyps = new JLabel("These are all the symptoms you have just provided that you have:", JLabel.CENTER);
-       jPanel.setLayout(new FlowLayout());
-       jPanel.add(currSyps);
-       jPanel.setVisible(true);
-       Font txtfont = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
-       textArea.setFont(txtfont);
-       jPanel.add(textArea);
-       jFrame.setSize(425,350);
-       //for each loop to go through client symptom list and add each symptom they have to the text area
-       for(String str: clientSyps) {
-           textArea.append(str + "\n");
-       }
-       //It is not necessary for our client to edit the array list in the text area
-       textArea.setEditable(false);
-
-
+        currSyps = new JLabel("These are all the symptoms you have just provided that you have:", JLabel.CENTER);
+        jPanel.setLayout(new FlowLayout());
+        jPanel.add(currSyps);
+        jPanel.setVisible(true);
+        Font txtfont = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+        textArea.setFont(txtfont);
+        jPanel.add(textArea);
+        jFrame.setSize(425, 350);
+        // for each loop to go through client symptom list and add each symptom they
+        // have to the text area
+        for (String str : clientSyps) {
+            textArea.append(str + "\n");
+        }
+        // It is not necessary for our client to edit the array list in the text area
+        textArea.setEditable(false);
     }
 
     public static void main(String args[]) {
