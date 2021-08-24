@@ -1,2 +1,2 @@
-# Interactive-Covid19-Symptom-Tracker-Java-Bot
-The chat bot that engages in bot-user interactions while responding with helpful messages to measure SARS-CoV-2 (Coronavirus or COVID-19) symptoms and treatment.
+# Java Covid19-Symptom-Tracker
+Allows for the client to track any SARS-CoV-2 (Coronavirus or COVID-19) symptoms that they may have.
