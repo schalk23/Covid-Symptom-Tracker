@@ -1,3 +1,4 @@
+  
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -242,20 +243,19 @@ public class symptomTracker extends JFrame implements ActionListener {
                 }
             }
         });
+        //CLICK WHEN FINISHED action button
         finished.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // symptoms need to be added before the client wants to proceeed
+                // symptoms need to be added before the client wants to proceed
                 if (clientSyps.isEmpty() && haveSymptrue == false) {
                     mustHaveSymp = new JLabel("You must add at least one symptom before proceeding.");
                     jPanel.add(mustHaveSymp);
                     jPanel.revalidate();
-                    jPanel.setVisible(true);
+                   // jPanel.setVisible(true);
                     haveSymptrue = true;
                 } else {
-                    mustHaveSymp.setVisible(false);
-                    mustHaveSymp.setVisible(true);
-                    if (haveSymptrue && !clientSyps.isEmpty()) {
+                    if (!clientSyps.isEmpty()) {
                         // remove all of the button and labels from this previous window for new window
                         jPanel.remove(cough);
                         jPanel.remove(fever);
@@ -272,10 +272,13 @@ public class symptomTracker extends JFrame implements ActionListener {
                         jPanel.remove(nausea);
                         jPanel.remove(vomiting);
                         jPanel.remove(diarrea);
-
                         jPanel.remove(whichSyps);
                         jPanel.remove(finished);
-                        jPanel.remove(mustHaveSymp);
+
+                        if(haveSymptrue) {
+                            jPanel.remove(mustHaveSymp);
+                        }
+                        
                         // Again, updating all of the removed components to move onto the next window
                         jPanel.revalidate();
                         jPanel.setVisible(false);
@@ -288,7 +291,7 @@ public class symptomTracker extends JFrame implements ActionListener {
 
     //This method designates the last page of the symptom checker
     private void lastPage() {
-        currSyps = new JLabel("These are all the symptoms you have just provided that you have:", JLabel.CENTER);
+        currSyps = new JLabel("Below are the symptoms listed that you selected:", JLabel.CENTER);
         jPanel.setLayout(new FlowLayout());
         jPanel.add(currSyps);
         jPanel.setVisible(true);
@@ -303,6 +306,8 @@ public class symptomTracker extends JFrame implements ActionListener {
         }
         // It is not necessary for our client to edit the array list in the text area
         textArea.setEditable(false);
+        //more symtoms RUN AGAIN MAYBE?
+        //now that you have selected these options, please contact your local healthcare provider or physician to report your symptoms
     }
 
     public static void main(String args[]) {
