@@ -8,21 +8,21 @@ import javax.swing.*;
 public class symptomTracker extends JFrame implements ActionListener {
     private JFrame jFrame;
     private JTextArea textArea;
-    private JTextField textField;
-    private JButton checkSyps, finished;
+    private JButton checkSyps, finished, goAgain;
     private JButton findNearestDoc;
     private JLabel jLabel;
     private JPanel jPanel;
-    private JLabel mustHaveSymp;
-    boolean haveSymptrue;
+    private JLabel mustHaveSymp, contactProvider1, contactProvider2, contactProvider3, space;
+    boolean haveSymptrue, continuation;
     // jButton Symptoms
     private JButton cough, fever, chills, shortOBreath, fatigue, muscOBodAche, headache, lossTaste, lossSmell,
-            soreThroat, runnyNose, vomiting, congestion, nausea, diarrea;
+            soreThroat, runnyNose, vomiting, congestion, nausea, diarrhea;
     private JLabel whichSyps, currSyps;
-    ArrayList<String> clientSyps = new ArrayList<String>();
+    private ArrayList<String> clientSyps = new ArrayList<String>();
+   
 
     public symptomTracker() {
-        setGUI();
+       setGUI();
     }
 
     private void setGUI() {
@@ -30,7 +30,6 @@ public class symptomTracker extends JFrame implements ActionListener {
         haveSymptrue = false;
         jFrame = new JFrame();
         textArea = new JTextArea();
-        textField = new JTextField();
         checkSyps = new JButton("Check off symptoms");
         jPanel = new JPanel();
         jPanel.setLayout(new GridLayout(3, 2));
@@ -45,7 +44,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrame.setVisible(true);
         jFrame.setResizable(false);
-        jFrame.setTitle(" Covid-19 Tracker and Interative Treatment Bot");
+        jFrame.setTitle(" Covid-19 Symptom Tracker");
         jFrame.setSize(500, 300);
         jPanel.add(jLabel);
         // jPanel.add(findNearestDoc);
@@ -93,7 +92,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         runnyNose = new JButton("Runny Nose");
         nausea = new JButton("Nausea");
         vomiting = new JButton("Vomiting");
-        diarrea = new JButton("Diarrhea");
+        diarrhea = new JButton("Diarrhea");
         finished = new JButton("CLICK WHEN FINISHED");
 
         // add new symptom buttons
@@ -111,7 +110,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         jPanel.add(runnyNose);
         jPanel.add(nausea);
         jPanel.add(vomiting);
-        jPanel.add(diarrea);
+        jPanel.add(diarrhea);
 
         whichSyps = new JLabel("Select all symptoms which apply to you.", JLabel.CENTER);
         Font text2 = new Font(Font.SANS_SERIF, Font.BOLD, 17);
@@ -123,6 +122,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         cough.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cough.setBackground(Color.yellow);
                 if (!clientSyps.contains("Cough")) {
                     clientSyps.add("Cough");
                 }
@@ -132,6 +132,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         fever.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fever.setBackground(Color.yellow);
                 if (!clientSyps.contains("Fever")) {
                     clientSyps.add("Fever");
                 }
@@ -141,6 +142,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         chills.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                chills.setBackground(Color.yellow);
                 if (!clientSyps.contains("Chills")) {
                     clientSyps.add("Chills");
                 }
@@ -150,6 +152,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         shortOBreath.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                shortOBreath.setBackground(Color.yellow);
                 if (!clientSyps.contains("Shortness of breath or difficulty breathing")) {
                     clientSyps.add("Shortness of breath or difficulty breathing");
                 }
@@ -158,6 +161,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         fatigue.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fatigue.setBackground(Color.yellow);
                 if (!clientSyps.contains("Fatigue")) {
                     clientSyps.add("Fatigue");
                 }
@@ -166,6 +170,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         muscOBodAche.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                muscOBodAche.setBackground(Color.yellow);
                 if (!clientSyps.contains("Muscle or body aches")) {
                     clientSyps.add("Muscle or body aches");
                 }
@@ -174,6 +179,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         headache.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                headache.setBackground(Color.yellow);
                 if (!clientSyps.contains("Headache")) {
                     clientSyps.add("Headache");
                 }
@@ -182,6 +188,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         lossTaste.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                lossTaste.setBackground(Color.yellow);
                 if (!clientSyps.contains("New loss of taste")) {
                     clientSyps.add("New loss of taste");
                 }
@@ -190,6 +197,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         lossSmell.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                lossSmell.setBackground(Color.yellow);
                 if (!clientSyps.contains("New loss of smell")) {
                     clientSyps.add("New loss of smell");
                 }
@@ -198,6 +206,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         soreThroat.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                soreThroat.setBackground(Color.yellow);
                 if (!clientSyps.contains("Sore throat")) {
                     clientSyps.add("Sore throat");
                 }
@@ -206,6 +215,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         congestion.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                congestion.setBackground(Color.yellow);
                 if (!clientSyps.contains("Congestion")) {
                     clientSyps.add("Congestion");
                 }
@@ -214,6 +224,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         runnyNose.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                runnyNose.setBackground(Color.yellow);
                 if (!clientSyps.contains("Runny nose")) {
                     clientSyps.add("Runny nose");
                 }
@@ -222,6 +233,7 @@ public class symptomTracker extends JFrame implements ActionListener {
         nausea.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                nausea.setBackground(Color.yellow);
                 if (!clientSyps.contains("Nausea")) {
                     clientSyps.add("Nausea");
                 }
@@ -230,14 +242,16 @@ public class symptomTracker extends JFrame implements ActionListener {
         vomiting.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                vomiting.setBackground(Color.yellow);
                 if (!clientSyps.contains("Vomiting")) {
                     clientSyps.add("Vomiting");
                 }
             }
         });
-        diarrea.addActionListener(new java.awt.event.ActionListener() {
+        diarrhea.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               diarrhea.setBackground(Color.yellow);
                 if (!clientSyps.contains("Diarrhea")) {
                     clientSyps.add("Diarrhea");
                 }
@@ -250,6 +264,7 @@ public class symptomTracker extends JFrame implements ActionListener {
                 // symptoms need to be added before the client wants to proceed
                 if (clientSyps.isEmpty() && haveSymptrue == false) {
                     mustHaveSymp = new JLabel("You must add at least one symptom before proceeding.");
+                    mustHaveSymp.setForeground(Color.RED);
                     jPanel.add(mustHaveSymp);
                     jPanel.revalidate();
                    // jPanel.setVisible(true);
@@ -271,7 +286,7 @@ public class symptomTracker extends JFrame implements ActionListener {
                         jPanel.remove(runnyNose);
                         jPanel.remove(nausea);
                         jPanel.remove(vomiting);
-                        jPanel.remove(diarrea);
+                        jPanel.remove(diarrhea);
                         jPanel.remove(whichSyps);
                         jPanel.remove(finished);
 
@@ -291,14 +306,20 @@ public class symptomTracker extends JFrame implements ActionListener {
 
     //This method designates the last page of the symptom checker
     private void lastPage() {
-        currSyps = new JLabel("Below are the symptoms listed that you selected:", JLabel.CENTER);
-        jPanel.setLayout(new FlowLayout());
+        continuation = false;
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.PAGE_AXIS));
+        jPanel.setSize(300,300);
+        currSyps = new JLabel("Below are the symptoms listed that you selected:");
+        currSyps.setAlignmentX(CENTER_ALIGNMENT);
+        currSyps.setAlignmentY(CENTER_ALIGNMENT);
+        Font text3 = new Font(Font.SANS_SERIF, Font.BOLD, 17);
+        currSyps.setFont(text3);
         jPanel.add(currSyps);
         jPanel.setVisible(true);
         Font txtfont = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
         textArea.setFont(txtfont);
-        jPanel.add(textArea);
-        jFrame.setSize(425, 350);
+        jPanel.add(textArea); 
+        jFrame.setSize(500, 450);
         // for each loop to go through client symptom list and add each symptom they
         // have to the text area
         for (String str : clientSyps) {
@@ -307,7 +328,41 @@ public class symptomTracker extends JFrame implements ActionListener {
         // It is not necessary for our client to edit the array list in the text area
         textArea.setEditable(false);
         //more symtoms RUN AGAIN MAYBE?
-        //now that you have selected these options, please contact your local healthcare provider or physician to report your symptoms
+        contactProvider1 = new JLabel("Now that you have selected these options", JLabel.CENTER);
+        contactProvider2 = new JLabel("please contact your local healthcare provider", JLabel.CENTER);
+        contactProvider3 = new JLabel ("or physician to report your symptoms.", JLabel.CENTER);
+        contactProvider1.setForeground(Color.RED);
+        contactProvider2.setForeground(Color.RED);
+        contactProvider3.setForeground(Color.RED);
+        //centering all of the components
+        contactProvider1.setAlignmentX(CENTER_ALIGNMENT);
+        contactProvider1.setAlignmentY(CENTER_ALIGNMENT);
+        contactProvider2.setAlignmentX(CENTER_ALIGNMENT);
+        contactProvider2.setAlignmentY(CENTER_ALIGNMENT);
+        contactProvider3.setAlignmentX(CENTER_ALIGNMENT);
+        contactProvider3.setAlignmentY(CENTER_ALIGNMENT);
+        jPanel.add(contactProvider1);
+        jPanel.add(contactProvider2);
+        jPanel.add(contactProvider3);
+        goAgain = new JButton("Click here to start over");
+        goAgain.setAlignmentX(CENTER_ALIGNMENT);
+        goAgain.setAlignmentY(CENTER_ALIGNMENT);
+        jPanel.add(goAgain);
+
+        goAgain.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //remove all of the components on the page in order to start again
+                jPanel.remove(goAgain);
+                jPanel.remove(currSyps);
+                jPanel.remove(textArea);
+                revalidate();
+                //Go to this private method to restart again
+                //setGUI();
+                continuation = true;
+            }
+        });
+
     }
 
     public static void main(String args[]) {
