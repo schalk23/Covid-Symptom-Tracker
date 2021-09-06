@@ -1,2 +1,2 @@
 # Java Covid19-Symptom-Tracker
-Allows for the client to track any SARS-CoV-2 (Coronavirus or COVID-19) symptoms that they may have.
+This Covid Symptom Tracker allows for the client to track any SARS-CoV-2 (Coronavirus or COVID-19) symptoms that they may have, while having the features of being able to go back to select other symptoms, and have highlighting of symptoms that have already been chosen previously. Written in Java Swing, the presentation of the application is sleek and easily maneuvered for any user who runs it.
