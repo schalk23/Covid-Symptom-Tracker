@@ -1,2 +1,2 @@
-# Interactive-Java-Bot
-The chat bot that engages in bot-user interactions while responding with meaningful and helpful messages inclined to the clients desires.
+# Java Covid19-Symptom-Tracker
+Allows for the client to track any SARS-CoV-2 (Coronavirus or COVID-19) symptoms that they may have.
